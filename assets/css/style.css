@@ -1,0 +1,742 @@
+/* =========================================================
+   1. VARIABLES Y ESTILOS GENERALES
+   ========================================================= */
+:root { 
+    --color-principal: #003B73; 
+    --color-secundario: #0074D9; 
+    --color-acento: #D92525; 
+    --color-fondo: #f4f6f9; 
+    --sombra-suave: 0 10px 25px rgba(0,0,0,0.1);
+    --sombra-premium: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+body { 
+    background-color: var(--color-fondo); 
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+    margin: 0; 
+}
+
+/* =========================================================
+   2. ESTILOS DEL DASHBOARD (SIDEBAR ANIMADO)
+   ========================================================= */
+.sidebar { 
+    width: 260px; 
+    height: 100vh; 
+    /* Gradiente animado fluido */
+    background: linear-gradient(-45deg, #003B73, #0074D9, #051937, #004d7a);
+    background-size: 400% 400%;
+    animation: gradientAnim 15s ease infinite;
+    color: white; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 1000; 
+    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+}
+
+@keyframes gradientAnim {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.sidebar-header { 
+    padding: 30px 20px; 
+    text-align: center; 
+    background: transparent; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+}
+
+.nav-link { 
+    color: rgba(255,255,255,0.8); 
+    padding: 14px 25px; 
+    margin: 8px 15px;
+    border-radius: 12px; 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    cursor: pointer; 
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.nav-link i {
+    margin-right: 15px;
+    font-size: 1.1rem;
+}
+
+.nav-link:hover, .nav-link.active { 
+    background-color: white; 
+    color: var(--color-principal) !important; 
+    padding-left: 30px; 
+    transform: translateX(10px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.main-content { 
+    margin-left: 260px; 
+    padding: 30px; 
+    width: calc(100% - 260px); 
+}
+
+.top-bar { 
+    background: white; 
+    padding: 15px 30px; 
+    border-radius: 15px; 
+    box-shadow: var(--sombra-suave); 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 30px; 
+    border-left: 5px solid var(--color-principal); 
+}
+
+/* =========================================================
+   3. TARJETAS DE INICIO (EFECTO DE SALTO)
+   ========================================================= */
+.card-pro {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 20px !important;
+    border: none !important;
+    text-decoration: none !important; /* QUITA SUBRAYADO */
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+
+.card-pro:hover {
+    transform: translateY(-12px); /* EFECTO SALTO */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2) !important;
+}
+
+/* Forzar que nada dentro de la tarjeta se raye */
+.card-pro, .card-pro *, .card-pro:hover, .card-pro:active {
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.card-azul { background: linear-gradient(135deg, #003B73 0%, #0056b3 100%); }
+.card-verde { background: linear-gradient(135deg, #134e5e 0%, #28a745 100%); }
+
+.icon-bg-overlay {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    font-size: 5rem;
+    opacity: 0.15;
+    transform: rotate(-10deg);
+    transition: 0.5s;
+}
+
+.card-pro:hover .icon-bg-overlay {
+    transform: rotate(0deg) scale(1.1);
+    opacity: 0.25;
+}
+
+/* Cuadro de Bienvenida */
+.welcome-box {
+    background: white;
+    padding: 3.5rem;
+    border-radius: 30px;
+    border: none;
+}
+
+.badge-premium {
+    background: #f8f9fa;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    padding: 0.8rem 1.5rem !important;
+    border-radius: 50px !important;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+}
+
+/* =========================================================
+   4. RECIBO Y ELEMENTOS VISUALES
+   ========================================================= */
+.recibo-box { 
+    background: white; 
+    border: 1.5px solid #000; 
+    padding: 25px; 
+    margin-bottom: 20px; 
+    border-radius: 5px;
+}
+.linea-corte { border-top: 2px dashed #999; margin: 30px 0; position: relative; text-align: center; }
+.linea-corte::after { 
+    content: "✂ CORTAR AQUÍ"; 
+    background: var(--color-fondo); 
+    padding: 0 15px; 
+    color: #666; 
+    font-size: 11px; 
+    font-weight: bold;
+    position: absolute; 
+    top: -10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+
+/* =========================================================
+   5. CONFIGURACIÓN DE IMPRESIÓN
+   ========================================================= */
+@media print {
+    .sidebar, .top-bar, .no-print, .btn, .navbar, form, .btn-no-print { 
+        display: none !important; 
+    }
+    .main-content { 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        width: 100% !important; 
+        margin-left: 0 !important;
+    }
+    body { 
+        background-color: white !important; 
+        color: #000 !important;
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important; 
+    }
+}
+
+/* =========================================================
+   6. ESTILOS DE FORMULARIOS (INSCRIPCIÓN)
+   ========================================================= */
+
+/* Contenedor blanco del formulario */
+.form-card {
+    background: white;
+    border-radius: 25px;
+    padding: 35px;
+    box-shadow: var(--sombra-suave);
+    border: none;
+}
+
+/* Resaltar etiquetas (letras negras) */
+.form-label-custom {
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Campos de texto modernos - COLOR REFORZADO */
+.form-control-custom {
+    /* Cambiado de #edf2f7 a #cbd5e0 para que el borde se vea más */
+    border: 2px solid #cbd5e0 !important; 
+    border-radius: 12px !important;
+    padding: 12px 15px !important;
+    transition: all 0.3s ease !important;
+    /* Cambiado de #f8fafc a #f1f5f9 para dar más profundidad */
+    background-color: #f1f5f9 !important;
+    color: #000 !important; /* Texto negro al escribir */
+}
+
+/* Efecto cuando haces clic en un cuadro */
+.form-control-custom:focus {
+    border-color: var(--color-principal) !important;
+    background-color: #fff !important;
+    box-shadow: 0 0 0 4px rgba(0, 59, 115, 0.1) !important;
+    transform: translateY(-2px);
+    outline: none;
+}
+
+/* Separadores de sección (Identificación, Encargado, etc.) */
+.section-divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0 20px 0;
+    color: var(--color-principal);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.section-divider::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    /* Línea un poco más visible */
+    background: #cbd5e0; 
+    margin-left: 15px;
+}
+
+/* Estilo para los selectores (dropdowns) */
+select.form-control-custom {
+    cursor: pointer;
+}
+
+/* =========================================================
+   7. GESTIÓN DE ALUMNOS (EFECTOS Y COLORES FINALES)
+   ========================================================= */
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Efecto de iluminación y elevación al pasar el mouse */
+.table-custom tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.table-custom tbody tr:hover {
+    background-color: #f0f7ff !important; /* Un azul muy clarito al pasar el mouse */
+    transform: scale(1.005);
+    box-shadow: inset 5px 0 0 #012442; /* Una línea azul a la izquierda al seleccionar */
+}
+
+.btn-circle-opt, .btn-circle-opt:hover {
+    text-decoration: none !important;
+    outline: none;
+}
+
+/* El verde sólido para ACTIVO */
+.badge-activo-solid {
+    background-color: #0ca678 !important;
+    color: white !important;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+/* El azul para los CURSOS */
+.badge-curso-azul {
+    background-color: #003B73 !important;
+    color: white !important;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 50px;
+}
+
+/* Botones circulares con colores sólidos */
+.btn-circle-opt {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: white !important;
+    margin: 0 2px;
+    transition: 0.3s;
+}
+
+/* Color específico para el botón de Ficha (antes el ojo) */
+.bg-ficha { background-color: #00b5ad !important; } /* Color Turquesa */
+
+.btn-circle-opt:hover {
+    transform: translateY(-3px) scale(1.1);
+    filter: brightness(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* =========================================================
+   8. REPORTE DIARIO Y TOTALES (ESTILO PREMIUM)
+   ========================================================= */
+
+/* Tabla de reporte con encabezado oscuro */
+.table-reporte thead th {
+    background-color: #1a202c !important;
+    color: white !important;
+    border: none;
+    padding: 15px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Efecto hover específico para reportes */
+.table-reporte tbody tr:hover {
+    background-color: #f1f8ff !important;
+    border-left: 5px solid var(--color-secundario);
+}
+
+/* Resaltar el monto en la tabla */
+.fw-monto {
+    font-weight: 800;
+    color: #1a202c;
+    font-size: 1.05rem;
+}
+
+/* Cuadro del Gran Total */
+.total-box {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 15px;
+    display: inline-block;
+    box-shadow: var(--sombra-suave);
+    text-align: right;
+}
+
+.total-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.total-monto {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #0ca678; /* El mismo verde de "Activo" */
+    display: block;
+}
+
+/* =========================================================
+    8. REPORTE DIARIO (ESTILOS UNIFICADOS)
+   ========================================================= */
+
+/* Estilos para la pantalla */
+.table-combinada thead th {
+    background-color: #0d6efd !important;
+    color: white !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding: 12px 10px;
+    border: none;
+}
+
+.table-combinada tbody td { 
+    color: #495057; 
+    padding: 10px; 
+    border-bottom: 1px solid #f1f3f5; 
+}
+
+.monto-celda { 
+    white-space: nowrap !important; 
+}
+
+.texto-mes {
+    color: #0d6efd;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* El total en verde que tanto nos costó pero que ahora brilla */
+.texto-total-exito { 
+    color: #198754 !important;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.fila-cierre {
+    background-color: #f8f9fa !important;
+    border-top: 3px solid #0d6efd !important;
+}
+
+/* Configuración de Impresión (Sin errores) */
+@media print {
+    .sidebar, .navbar, .btn-no-print, form, .top-bar { 
+        display: none !important; 
+    }
+    
+    .main-content { 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        width: 100% !important; 
+        margin-left: 0 !important; 
+    }
+    
+    .table-combinada thead th { 
+        background-color: #f2f2f2 !important; 
+        color: #000 !important; 
+        border: 1px solid #000 !important;
+        padding: 5px !important;
+        font-size: 9pt !important;
+    }
+    
+    .table-combinada tbody td { 
+        border: 1px solid #ccc !important; 
+        padding: 5px !important;
+        font-size: 9pt !important;
+        color: #000 !important;
+    }
+    
+    .fila-cierre { 
+        background-color: #f8f9fa !important; 
+        border-top: 2px solid #000 !important; 
+    }
+    
+    /* Corrección de la línea amarilla/error */
+    .texto-total-exito { 
+        color: #198754 !important; 
+        font-size: 14pt !important;
+        font-weight: bold !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    .card { border: none !important; box-shadow: none !important; }
+}
+
+/* =========================================================
+   ESTILOS PREMIUM PARA EDICIÓN (AZUL)
+   ========================================================= */
+
+/* Tarjeta contenedora */
+.form-card-compact {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+/* Encabezado del formulario */
+.edit-header-blue {
+    background: #003B73; /* Azul Institucional */
+    color: white !important;
+    padding: 25px;
+}
+
+/* Divisores de sección elegantes */
+.section-divider-blue {
+    color: #003B73;
+    font-weight: 700;
+    border-bottom: 2px solid #f1f5f9;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+}
+
+/* Botón Guardar */
+.btn-actualizar-blue {
+    background-color: #003B73 !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-actualizar-blue:hover {
+    background-color: #00264d !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 59, 115, 0.3);
+}
+
+/* Botón Cancelar */
+.btn-cancelar-moderno {
+    background-color: transparent;
+    color: #6c757d;
+    border: 2px solid #dee2e6;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-cancelar-moderno:hover {
+    background-color: #fff5f5;
+    border-color: #dc3545;
+    color: #dc3545;
+    transform: translateY(-2px);
+}
+
+/* === ESTILOS DEL RECIBO DE PAGO === */
+.recibo-box {
+    background: #fff;
+    border: 1.5px solid #000; 
+    padding: 25px;
+    position: relative;
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    margin-bottom: 20px;
+}
+
+.linea-firma {
+    border-bottom: 1px dashed #000;
+    width: 200px;
+    margin-top: 40px;
+    margin-bottom: 5px;
+}
+
+.caja-firma {
+    text-align: center;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.linea-corte {
+    border-bottom: 2px dashed #999;
+    margin: 25px 0;
+    position: relative;
+}
+
+.linea-corte::after {
+    content: '✂ Cortar aquí';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f4f6f9; 
+    padding: 0 10px;
+    color: #666;
+    font-size: 12px;
+}
+
+.logo-recibo {
+    width: 70px;
+    height: auto;
+}
+
+/* Ajuste para que el fondo de la tijerita sea blanco al imprimir */
+@media print {
+    .linea-corte::after {
+        background: white !important;
+    }
+}
+
+/* =========================================================
+   TARJETA DE PAGOS - DISEÑO PROFESIONAL AZUL
+   ========================================================= */
+
+/* Buscador con Borde Inteligente (Se activa al entrar) */
+.form-control-buscar {
+    border: 2px solid #dee2e6 !important; /* Gris suave por defecto */
+    background-color: #fff !important;
+    font-size: 1.1rem !important;
+    color: #000 !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Efecto de foco: Borde azul institucional */
+.form-control-buscar:focus {
+    border-color: #003B73 !important; 
+    box-shadow: 0 0 0 4px rgba(0, 59, 115, 0.1) !important;
+    background-color: #fff !important;
+    outline: none;
+}
+
+/* Botón Limpiar Azul */
+.btn-limpiar-azul {
+    background-color: #003B73 !important;
+    color: white !important;
+    border: none !important;
+    font-weight: 600 !important;
+    padding: 10px 25px !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-limpiar-azul:hover {
+    background-color: #0074D9 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 59, 115, 0.2);
+}
+
+/* Contenedor de los Meses (Semáforo de Pagos) */
+.contenedor-meses {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.mes-card {
+    border-radius: 15px;
+    padding: 20px 10px;
+    text-align: center;
+    color: white !important;
+    font-weight: bold;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+}
+
+.mes-card:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* Estados de pago con Degradados */
+.pagado { background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%); }
+.proximo { background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%); color: #212529 !important; }
+.pendiente { background: linear-gradient(135deg, #dc3545 0%, #bd2130 100%); }
+.futuro { background: linear-gradient(135deg, #6c757d 0%, #495057 100%); }
+
+.info-recibo {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 4px;
+}
+
+/* === NUEVOS AJUSTES RESPONSIVE Y FOCO === */
+
+/* 1. Habilitar scroll en el Sidebar para pantallas de Laptop */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Permite bajar hasta el botón de cerrar sesión */
+    overflow-x: hidden;
+}
+
+/* Estilo sutil para la barra de scroll del menú */
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+/* 2. Empujar el botón de Cerrar Sesión al final del menú */
+.mt-auto { margin-top: auto !important; }
+
+/* 3. Unificar el color azul al hacer clic en los buscadores */
+.form-control-custom:focus, 
+.form-control-buscar:focus, 
+.form-control-custom-dark:focus, 
+.form-select:focus {
+    border-color: #003B73 !important; /* Azul Institucional */
+    background-color: #fff !important;
+    box-shadow: 0 0 0 4px rgba(0, 59, 115, 0.1) !important;
+    outline: none;
+}
+
+/* === AJUSTES PARA LAPTOP Y FOCO AZUL === */
+
+/* Habilitar scroll en el Sidebar si el menú es muy largo */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; 
+    overflow-x: hidden;
+}
+
+/* Barra de scroll del menú elegante */
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+/* Forzar que el botón de cerrar sesión se vaya al fondo */
+.mt-auto { margin-top: auto !important; }
+
+/* Brillo azul en todos los buscadores al hacer clic */
+.form-control-custom:focus, 
+.form-control-buscar:focus, 
+.form-control-custom-dark:focus, 
+.form-select:focus {
+    border-color: #003B73 !important; 
+    background-color: #fff !important;
+    box-shadow: 0 0 0 4px rgba(0, 59, 115, 0.1) !important;
+    outline: none;
+}

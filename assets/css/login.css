@@ -1,1 +1,109 @@
+/* login.css - Amanecer Científico */
 
+/* FONDO ANIMADO */
+.login-body {
+    background: linear-gradient(-45deg, #003B73, #0074D9, #051937, #004d7a);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* TARJETA COMPACTA */
+.login-card {
+    background: rgba(255, 255, 255, 0.96);
+    padding: 30px 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 340px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.icon-circle {
+    width: 75px;
+    height: 75px;
+    background: #003B73;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    box-shadow: 0 5px 15px rgba(0,59,115,0.3);
+}
+
+/* INPUTS */
+.form-control {
+    border-radius: 15px !important;
+    padding: 10px 15px !important;
+    font-size: 14px;
+    border: 1px solid #ddd !important;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 8px rgba(0,59,115,0.15) !important;
+    border-color: #003B73 !important;
+    transform: translateY(-2px);
+}
+
+/* POSICIONAMIENTO DEL OJO */
+.password-container { 
+    position: relative; 
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    color: #999;
+    cursor: pointer;
+    z-index: 10; /* Asegura que esté por encima del input */
+}
+
+/* BOTÓN LOGIN */
+.btn-login {
+    background: #003B73 !important;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+    margin-top: 5px;
+    color: white !important;
+    width: 100%;
+}
+
+.btn-login:hover {
+    background: #0056b3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.form-label {
+    font-size: 12px;
+    margin-left: 10px;
+}
