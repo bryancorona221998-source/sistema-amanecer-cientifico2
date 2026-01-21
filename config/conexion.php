@@ -5,7 +5,7 @@ date_default_timezone_set('America/Guatemala');
 // Datos de conexión
 $host = "localhost";
 $usuario = "root";
-$clave = ""; 
+$clave = "Academia.2026"; 
 $bd = "amanecer_cientifico";
 
 // Crear conexión
@@ -18,4 +18,5 @@ if (!$conexion) {
 
 // Configurar caracteres (para que las tildes y ñ se vean bien)
 mysqli_set_charset($conexion, "utf8");
+
 ?>
